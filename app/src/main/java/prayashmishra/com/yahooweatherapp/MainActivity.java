@@ -35,7 +35,13 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                 .show();
     }
 
-    
+    protected void setOrientation() {
+        int current = getRequestedOrientation();
+        // only switch the orientation if not in portrait
+        if (current != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+    }
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
