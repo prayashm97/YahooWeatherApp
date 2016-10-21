@@ -17,6 +17,27 @@ import prayashmishra.com.yahooweatherapp.service.WeatherServiceCallback;
 
 public class MainActivity extends AppCompatActivity implements WeatherServiceCallback, AdapterView.OnItemClickListener {
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        checkInternetDialog();
+    }
+
+
+
+    @Override
+    public void serviceSuccess(final Channel channel) {
+    }
+
+    @Override
+    public void serviceFailure(Exception exception) {
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+    }
+
     //If user presses the back button, prompt with a dialog
     @Override
     public void onBackPressed() {
@@ -35,26 +56,12 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                 .show();
     }
 
-    protected void setOrientation() {
-        int current = getRequestedOrientation();
-        // only switch the orientation if not in portrait
-        if (current != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
-    }
 
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        checkInternetDialog();
     }
 
     public void checkInternetDialog() {
@@ -75,15 +82,4 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         }
     }
 
-    @Override
-    public void serviceSuccess(final Channel channel) {
-    }
-
-    @Override
-    public void serviceFailure(Exception exception) {
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-    }
 }
