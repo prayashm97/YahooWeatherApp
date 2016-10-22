@@ -2,7 +2,6 @@ package prayashmishra.com.yahooweatherapp;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.ActivityInfo;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -21,9 +20,13 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        checkInternetDialog();
-    }
+        //checks the internet connection
+        if (internetDialog()) {
+            //if there is internet, does not exit the app
+            //starts the app
+        }
 
+    }
 
 
     @Override
@@ -64,9 +67,10 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public void checkInternetDialog() {
+    public boolean internetDialog() {
         if (isNetworkAvailable()) {
             Toast.makeText(getApplicationContext(), "Internet: yes", Toast.LENGTH_LONG).show();
+            return true;
         } else {
             new AlertDialog.Builder(this)
                     .setTitle("No internet connection")
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                     })
                     .show();
         }
+        return false;
     }
 
 }
