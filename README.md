@@ -3,4 +3,4 @@ Android app that uses Yahoo's weather Web API
 
 Working on the Google Places API implimentation
 
-Not finsihed
+Jan 26th: Mostly finsihed, functions as it should
