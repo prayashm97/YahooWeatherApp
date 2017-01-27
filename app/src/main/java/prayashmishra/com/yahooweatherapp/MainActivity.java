@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
     public boolean internetDialog() {
         if (isNetworkAvailable()) {
-            Toast.makeText(getApplicationContext(), "Internet: yes", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Internet: yes", Toast.LENGTH_LONG).show();
             return true;
         } else {
             new AlertDialog.Builder(this)
@@ -134,8 +134,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
             service = new YahooWeatherService(this);
             service.setLocation("Toronto");
 
-            appendLog(getCurrentTimeStamp());
-
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
@@ -146,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                         } else {
                             locationSearch[0] = SearchAutoCompleteTextView.getText().toString();
                             service.setLocation(locationSearch[0]);
-                            Toast.makeText(getApplicationContext(), service.getLocation(), Toast.LENGTH_LONG).show();
+//                            Toast.makeText(getApplicationContext(), service.getLocation(), Toast.LENGTH_LONG).show();
 
                             //Toast.makeText(getApplicationContext(),locationSearch[0],Toast.LENGTH_LONG).show();
 
@@ -176,7 +174,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
     @Override
     public void serviceSuccess(final Channel channel) {
-        appendLog("success");
         Item item = channel.getItem();
         int resourceId = getResources().getIdentifier("drawable/icon_" + item.getCondition().getCode(), null, getPackageName());
 
@@ -189,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
 
         Toast.makeText(getApplicationContext(), service.getLocation(), Toast.LENGTH_SHORT).show();
-        appendLog("weather for: " + service.getLocation() + " : " + channel.getItem().getCondition().getTemperature());
         final int tempChange = channel.getItem().getCondition().getTemperature();
         int fah = (int) 1.8;
         final int fahTemp = tempChange * fah + 32;
@@ -229,25 +225,25 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
     public void appendLog(String text) {
-        File logFile = new File("sdcard/logFile.txt");
-        if (!logFile.exists()) {
-            try {
-                logFile.createNewFile();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        try {
-            //BufferedWriter for performance, true to set append to file flag
-            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
-            buf.append(text);
-            buf.newLine();
-            buf.close();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+//        File logFile = new File("sdcard/logFile.txt");
+//        if (!logFile.exists()) {
+//            try {
+//                logFile.createNewFile();
+//            } catch (IOException e) {
+//                // TODO Auto-generated catch block
+//                e.printStackTrace();
+//            }
+//        }
+//        try {
+//            //BufferedWriter for performance, true to set append to file flag
+//            BufferedWriter buf = new BufferedWriter(new FileWriter(logFile, true));
+//            buf.append(text);
+//            buf.newLine();
+//            buf.close();
+//        } catch (IOException e) {
+//            // TODO Auto-generated catch block
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -283,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
                     if (constraint != null) {
                         // Retrieve the autocomplete results.
                         resultList = autocomplete(constraint.toString());
-                        appendLog("Result from google: " + resultList.toString());
+                        //appendLog("Result from google: " + resultList.toString());
                         notifyDataSetChanged();
                         // Assign the data to the FilterResults
                         filterResults.values = resultList;
