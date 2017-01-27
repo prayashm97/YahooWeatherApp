@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -26,11 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
@@ -40,10 +35,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.net.ssl.HttpsURLConnection;
-
-import prayashmishra.com.yahooweatherapp.data.*;
-import prayashmishra.com.yahooweatherapp.service.*;
+import prayashmishra.com.yahooweatherapp.data.Channel;
+import prayashmishra.com.yahooweatherapp.data.Item;
+import prayashmishra.com.yahooweatherapp.service.WeatherServiceCallback;
+import prayashmishra.com.yahooweatherapp.service.YahooWeatherService;
 
 public class MainActivity extends AppCompatActivity implements WeatherServiceCallback, AdapterView.OnItemClickListener {
 
@@ -114,8 +109,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //checks the internet connection
-        if (internetDialog())
-        {
+        if (internetDialog()) {
             //if there is internet, does not exit the app
             //starts the app
 
@@ -136,8 +130,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
             searchButton.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
+                public void onClick(View v) {
                     if (internetDialog()) {
                         if (SearchAutoCompleteTextView.getText().toString().isEmpty()) {
                             Toast.makeText(getApplicationContext(), "Enter a location", Toast.LENGTH_LONG).show();
@@ -158,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
 
-    private static String getCurrentTimeStamp(){
+    private static String getCurrentTimeStamp() {
         try {
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -357,8 +350,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 
         return resultList;
     }
-
-
 
 
 }
