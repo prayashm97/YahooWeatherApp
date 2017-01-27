@@ -8,6 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/backcolor"
     tools:context="prayashmishra.com.yahooweatherapp.MainActivity">
 
     <Button
@@ -25,7 +26,8 @@
         android:id="@+id/searchWeather"
         android:hint="Enter city name.."
         android:layout_alignParentTop="true"
-
+        android:textColorHint="@color/grey35"
+        android:textColor="@color/white"
         android:layout_alignEnd="@+id/weatherIconImageView"
         android:layout_alignBottom="@id/WeatherButton" />
 
@@ -45,6 +47,7 @@
         android:text="@string/temperature"
         android:id="@+id/temperatureTextView"
         android:layout_below="@+id/weatherIconImageView"
+        android:textColor="@color/white"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
         android:typeface="serif"
@@ -55,6 +58,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="@string/condition"
+        android:textColor="@color/white"
         android:id="@+id/conditionTextView"
         android:layout_below="@+id/temperatureTextView"
         android:layout_centerHorizontal="true" />
@@ -64,6 +68,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/location"
+        android:textColor="@color/white"
         android:id="@+id/locationTextView"
         android:layout_below="@+id/conditionTextView"
         android:layout_centerHorizontal="true"
