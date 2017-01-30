@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     private TextView conditionTextView;
     private TextView locationTextView;
     private AutoCompleteTextView SearchAutoCompleteTextView;
-    private Button searchButton;
 
 
     //If user presses the back button, prompt with a dialog
@@ -118,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
             conditionTextView = (TextView) findViewById(R.id.conditionTextView);
             locationTextView = (TextView) findViewById(R.id.locationTextView);
             SearchAutoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchWeather);
-            searchButton = (Button) findViewById(R.id.WeatherButton);
+            Button searchButton = (Button) findViewById(R.id.WeatherButton);
 
 
             SearchAutoCompleteTextView.setAdapter(new GooglePlacesAutocompleteAdapter(getApplicationContext(), R.layout.list_item));
@@ -151,20 +150,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
     }
 
 
-    private static String getCurrentTimeStamp() {
-        try {
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String currentDateTime = dateFormat.format(new Date()); // Find todays date
-
-            return currentDateTime;
-        } catch (Exception e) {
-            e.printStackTrace();
-
-            return null;
-        }
-    }
-
     @Override
     public void serviceSuccess(final Channel channel) {
         Item item = channel.getItem();
@@ -182,15 +167,17 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
         final int tempChange = channel.getItem().getCondition().getTemperature();
         int fah = (int) 1.8;
         final int fahTemp = tempChange * fah + 32;
+        final String fahrenheitSign = getString(R.string.fahrenheit);
+        final String fahFull = fahTemp + fahrenheitSign;
         temperatureTextView.setOnTouchListener(new View.OnTouchListener() {
 
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
 
-                if (temperatureTextView.getText().equals(fahTemp + "\u00B0F")) {
+                if (temperatureTextView.getText().equals(fahFull)) {
                     temperatureTextView.setText(tempChange + "\u00B0" + channel.getUnits().getTemperature());
                 } else if (temperatureTextView.getText().equals(tempChange + "\u00B0" + channel.getUnits().getTemperature())) {
-                    temperatureTextView.setText(fahTemp + "\u00B0F");
+                    temperatureTextView.setText(fahFull);
                 }
 
                 return false;
@@ -223,7 +210,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 //            try {
 //                logFile.createNewFile();
 //            } catch (IOException e) {
-//                // TODO Auto-generated catch block
 //                e.printStackTrace();
 //            }
 //        }
@@ -234,7 +220,6 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
 //            buf.newLine();
 //            buf.close();
 //        } catch (IOException e) {
-//            // TODO Auto-generated catch block
 //            e.printStackTrace();
 //        }
     }
@@ -339,10 +324,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
             // Extract the Place descriptions from the results
             resultList = new ArrayList(predsJsonArray.length());
             for (int i = 0; i < predsJsonArray.length(); i++) {
-                System.out.println(predsJsonArray.getJSONObject(i).getString("description"));
-                System.out.println("============================================================");
                 resultList.add(predsJsonArray.getJSONObject(i).getString("description"));
-                Log.i(resultList.toString(), "1");
             }
         } catch (JSONException e) {
             Log.e(LOG_TAG, "Cannot process JSON results", e);
