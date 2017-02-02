@@ -17,7 +17,7 @@ change your directory
 
 Copy app-release.apk to your Android device.
 
-Install the app on your android device.
+Install the app on your Android device.
     
 ```
 
