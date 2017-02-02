@@ -290,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements WeatherServiceCal
             StringBuilder sb = new StringBuilder(PLACES_API_BASE + TYPE_AUTOCOMPLETE + OUT_JSON);
             sb.append("?key=" + API_KEY);
             sb.append("&types=(cities)");
-            sb.append("&input=" + URLEncoder.encode(input, "utf8"));
+            sb.append("&input=").append(URLEncoder.encode(input, "utf8"));
 
             URL url = new URL(sb.toString());
 
